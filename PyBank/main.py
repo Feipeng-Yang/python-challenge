@@ -6,9 +6,6 @@ import csv
 # Read data from "budget_data.csv"
 budget_data = os.path.join('Resources', 'budget_data.csv')
 
-print("Finanicial Analysis")
-print("-------------------------")
-
 # Initialize variables
 months = 0
 total = 0
@@ -17,14 +14,12 @@ greatest_decrease_amount = 0
 
 with open(budget_data) as budget:
     data = csv.reader(budget, delimiter=",")
-    # print(data)
+
     # Read the header row
     data_header = next(data)
     previous_month = next(data)
     first_month = previous_month
     months += 1
-    # print(f"Header: {data_header}")
-    # print(previous_month)
     total += int(previous_month[1])
 
     # Read each row of data after the first row
@@ -32,7 +27,6 @@ with open(budget_data) as budget:
         # Add budget for total
         total += int(row[1])
         months += 1
-        # print(row)
         current_month = row
         change = int(current_month[1]) - int(previous_month[1])
 
@@ -53,6 +47,8 @@ with open(budget_data) as budget:
     format_average_change = "{:.2f}".format(average_change)
 
     # Print results to terminal
+    print("Finanicial Analysis")
+    print("-------------------------")
     print(f"Total Month: {months}")
     print(f"Total: ${total}")
     print(f"Average Change: ${format_average_change}")
