@@ -10,7 +10,6 @@ election_data = os.path.join("Resources", "election_data.csv")
 candidate_list = []
 total_votes = 0
 
-
 with open(election_data) as VotingResult:
     votes = csv.reader(VotingResult, delimiter = ',')
 
@@ -21,11 +20,9 @@ with open(election_data) as VotingResult:
     for row in votes:
         # count total votes
         total_votes += 1
-
         # construct a list that contains all the candidates: candidate_list
         if row[2] not in candidate_list:
             candidate_list.append(row[2])
-
 
 # -----------read each row in the file again, count votes for each candidate------------
 # define a list (with same length as candidate_list) to hold the votes for each candidate
@@ -47,10 +44,9 @@ print("Election Results")
 print("-------------------------")
 print(f"Total Votes: {total_votes}")
 print("-------------------------")
-# print the list of candidate and their election results
+# loop through the candidate list, print candidate name, vote percentage and vote numbers
 for i in range(len(candidate_list)):
     percentage = "{:.3%}".format(vote_list[i]/total_votes)
-
     print(f"{candidate_list[i]}: {percentage} ({vote_list[i]})")
 
 print("-------------------------")
@@ -74,16 +70,15 @@ with open(output_path, "w") as text_file:
     text_file.write("-------------------------")
     text_file.write('\n')
 
+    # loop through the candidates, write candidate name, vote percentage and vote numbers
     for i in range(len(candidate_list)):
         percentage = "{:.3%}".format(vote_list[i]/total_votes)
         text_file.write(f"{candidate_list[i]}: {percentage} ({vote_list[i]})")
         text_file.write('\n')
+
     text_file.write("-------------------------")
     text_file.write('\n')
     text_file.write(f"Winner: {winner}")
     text_file.write('\n')
     text_file.write("-------------------------")
     text_file.write('\n')
-
-
-
